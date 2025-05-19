@@ -23,7 +23,7 @@ export class MessageController {
     //   ))
     // }
     return this.messageService.send('createMessage', {
-      createMessageDto,
+      ...createMessageDto,
       files: files || []
     })
       .pipe(

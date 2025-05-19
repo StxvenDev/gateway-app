@@ -6,5 +6,5 @@ export class CreateMessageDto {
   message:string
 
   @IsString()
-  addressees: string
+  addresses: string
 }
