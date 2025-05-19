@@ -22,7 +22,7 @@ export class MessageController {
     //     }
     //   ))
     // }
-    return this.messageService.send('createMessage', {
+     this.messageService.emit('createMessage', {
       ...createMessageDto,
       files: files || []
     })
@@ -30,6 +30,11 @@ export class MessageController {
         catchError(error => { throw new RpcException(error) }
         )
       )
+
+      return {
+        status: 'success',
+        message: 'Message in queue',
+      }
   }
 
 }
