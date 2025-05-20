@@ -12,17 +12,7 @@ export class MessageController {
   @Post()
   @UseInterceptors(FilesInterceptor('files', 10))
   create(@UploadedFiles() files: Express.Multer.File[], @Body() createMessageDto: CreateMessageDto) {
-    // if(files){
-    //   const metaFiles = files.map(file => (
-    //      {
-    //       filename: file.filename,
-    //       mimetype: file.mimetype,
-    //       size: file.size,
-
-    //     }
-    //   ))
-    // }
-     this.messageService.emit('createMessage', {
+     return this.messageService.send('createMessage', {
       ...createMessageDto,
       files: files || []
     })
@@ -30,11 +20,6 @@ export class MessageController {
         catchError(error => { throw new RpcException(error) }
         )
       )
-
-      return {
-        status: 'success',
-        message: 'Message in queue',
-      }
   }
 
 }
